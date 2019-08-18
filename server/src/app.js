@@ -4,6 +4,9 @@ const schema = require('../schema/schema');
 const mongoose = require('mongoose');
 const uri = "mongodb+srv://rainboard:.Amdapua45300@graphql-rn775.gcp.mongodb.net/test?retryWrites=true&w=majority";
 const app = express();
+const cors = require('cors');
+
+app.use(cors());
 
 mongoose.connect(uri, { useNewUrlParser: true });
 mongoose.connection.once('open', () => console.log("DB connected"));
