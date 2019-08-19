@@ -1,12 +1,16 @@
 import React from 'react'
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost'
+import BookCard from './BookCard'
 
 const getBooksQuery = gql`
     {
         books{
-            name
             id
+            name
+            author {
+                name
+            }
         }
     }
 `;
@@ -15,17 +19,15 @@ export default function BookList() {
     const { loading, error, data } = useQuery(getBooksQuery);
     if (loading) return 'Loading...';
     if (error) return `Error! ${ error.message }`;
+    //console.log(data);
 
     return (
-        <div className='flex flex-wrap  bg-red-200'>
-            <p className='text-3xl w-full bg-red-300'>Book List</p>
-                <ul>
-                    { data.books.map(book => (
-                        <li className="hover:bg-red-400">
-                            <p>{ book.name }</p>
-                        </li>
-                    ))}
-                </ul>
+        <div className="w-4/6 mx-auto">
+            <ul className="w-full h-full flex flex-wrap justify-center">
+                { data.books.map(book => (
+                    <BookCard name={ book.name } author={ book.author.name }  key={ book.id } />
+                ))}
+            </ul>
         </div>
     )
 }
