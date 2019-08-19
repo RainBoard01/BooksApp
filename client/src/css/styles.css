@@ -1,0 +1,12 @@
+.appStyle {
+    position: absolute;
+    top: 0px;
+}
+
+.navbar input:checked ~ span {
+    color: #000;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.25);
+}
